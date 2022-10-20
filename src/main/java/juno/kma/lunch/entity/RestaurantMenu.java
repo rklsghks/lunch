@@ -1,31 +1,27 @@
 package juno.kma.lunch.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
 
 @Builder
-@Getter
-@Setter
-@ToString(exclude = {"restaurant", "menu"})
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@IdClass(RestaurantMenuId.class)
 @Entity
-public class RestaurantMenu implements Serializable {
+public class RestaurantMenu {
 
     @Id
     @ManyToOne
-//    @OneToOne
     @JoinColumn(name = "restaurant_cd")
-    @EqualsAndHashCode.Include
+    @JsonBackReference
     private Restaurant restaurant;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "menu_cd")
-    @EqualsAndHashCode.Include
+    @JsonBackReference
     private Menu menu;
 }

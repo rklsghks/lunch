@@ -38,12 +38,40 @@
         </thead>
         <tbody/>
     </table>
+    <hr>
+    <hr>
+    <h1>식당 메뉴</h1>
+    <div>
+        <button onclick="addRestaurantMenu()">add</button>
+    </div>
+    <table id="restaurant-menu-table">
+        <thead>
+        <tr>
+            <th>cd</th>
+            <th>name</th>
+        </tr>
+        </thead>
+        <tbody/>
+    </table>
 </div>
 <script type="text/javascript" src="js/jquery/jquery-3.6.1.js"></script>
 <script type="text/javascript">
     $(function () {
         getRestaurantList();
     })
+
+    function addRestaurantMenu() {
+        $.ajax({
+            url: "/restaurant/menu/add",
+            type: "post",
+            success: function () {
+                // getMenuList();
+            },
+            error: function () {
+                console.log("error");
+            }
+        })
+    }
 
     function addMenu() {
 

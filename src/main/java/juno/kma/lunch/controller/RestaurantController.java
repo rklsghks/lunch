@@ -6,9 +6,11 @@ import juno.kma.lunch.entity.Menu;
 import juno.kma.lunch.entity.Restaurant;
 import juno.kma.lunch.entity.RestaurantMenu;
 import juno.kma.lunch.repository.MenuRepository;
+import juno.kma.lunch.repository.RestaurantMenuRepository;
 import juno.kma.lunch.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.annotations.BatchSize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +26,8 @@ import java.util.List;
 public class RestaurantController {
 
     private RestaurantService restaurantService;
-    private MenuService menuService;
     private RestaurantRepository restaurantRepository;
-    private MenuRepository menuRepository;
+    private RestaurantMenuRepository restaurantMenuRepository;
 
     @PostMapping("add")
     public void addRestaurant(Restaurant restaurant) {
@@ -39,10 +40,30 @@ public class RestaurantController {
         restaurantService.save(restaurant);
     }
 
+    @BatchSize(size = 1)
     @GetMapping("list")
     public List<Restaurant> getRestaurantList() {
 
         return restaurantRepository.findAll();
+    }
+
+    @PostMapping("menu/add")
+    public void addRestaurantMenu() {
+
+        Restaurant restaurant = Restaurant.builder()
+                .restaurantCd(1L)
+                .build();
+
+        Menu menu = Menu.builder()
+                .menuCd(1L)
+                .build();
+
+        RestaurantMenu restaurantMenu = RestaurantMenu.builder()
+                .restaurant(restaurant)
+                .menu(menu)
+                .build();
+
+        restaurantMenuRepository.save(restaurantMenu);
     }
 
 }

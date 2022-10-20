@@ -23,7 +23,7 @@ spring:
       minimum-idle: 2
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     generate-ddl: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
