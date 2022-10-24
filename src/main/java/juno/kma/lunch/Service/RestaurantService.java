@@ -12,6 +12,7 @@ import java.util.List;
 public class RestaurantService {
 
     private RestaurantRepository restaurantRepository;
+
     public void save(Restaurant restaurant) {
 
         restaurantRepository.save(restaurant);
@@ -21,5 +22,4 @@ public class RestaurantService {
 
         return restaurantRepository.findAll();
     }
-
 }

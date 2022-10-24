@@ -58,6 +58,7 @@
 <script type="text/javascript">
     $(function () {
         getRestaurantList();
+        // getMenuList();
     })
 
     function addRestaurantMenu() {
@@ -96,7 +97,6 @@
         $.ajax({
             url: "/menu/list",
             success: function (data) {
-                console.log("data: " + data);
                 str = "";
                 for (let idx in data) {
                     console.log(data[idx]);

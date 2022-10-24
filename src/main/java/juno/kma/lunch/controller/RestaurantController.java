@@ -1,22 +1,19 @@
 package juno.kma.lunch.controller;
 
-import juno.kma.lunch.Service.MenuService;
 import juno.kma.lunch.Service.RestaurantService;
 import juno.kma.lunch.entity.Menu;
 import juno.kma.lunch.entity.Restaurant;
 import juno.kma.lunch.entity.RestaurantMenu;
-import juno.kma.lunch.repository.MenuRepository;
 import juno.kma.lunch.repository.RestaurantMenuRepository;
 import juno.kma.lunch.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.hibernate.annotations.BatchSize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
@@ -35,16 +32,18 @@ public class RestaurantController {
         RestaurantMenu restaurantMenu = RestaurantMenu.builder()
                 .restaurant(restaurant)
                 .build();
-//        restaurant.setRestaurantMenuList();
 
         restaurantService.save(restaurant);
     }
 
-    @BatchSize(size = 1)
+//    @BatchSize(size = 1)
     @GetMapping("list")
     public List<Restaurant> getRestaurantList() {
 
-        return restaurantRepository.findAll();
+        List<Restaurant> restaurantList = restaurantRepository.findAllEntityGraph();
+        log.info(restaurantList);
+
+        return restaurantList;
     }
 
     @PostMapping("menu/add")
