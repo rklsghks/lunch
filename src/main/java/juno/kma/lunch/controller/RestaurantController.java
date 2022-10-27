@@ -1,5 +1,7 @@
 package juno.kma.lunch.controller;
 
+import juno.kma.lunch.DTO.RestaurantMenuDTO;
+import juno.kma.lunch.Service.RestaurantMenuService;
 import juno.kma.lunch.Service.RestaurantService;
 import juno.kma.lunch.entity.Menu;
 import juno.kma.lunch.entity.Restaurant;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Log4j2
@@ -25,25 +27,23 @@ public class RestaurantController {
     private RestaurantService restaurantService;
     private RestaurantRepository restaurantRepository;
     private RestaurantMenuRepository restaurantMenuRepository;
+    private RestaurantMenuService restaurantMenuService;
 
     @PostMapping("add")
     public void addRestaurant(Restaurant restaurant) {
 
-        RestaurantMenu restaurantMenu = RestaurantMenu.builder()
-                .restaurant(restaurant)
-                .build();
-
-        restaurantService.save(restaurant);
+        restaurantRepository.save(restaurant);
     }
 
-//    @BatchSize(size = 1)
+    //    @BatchSize(size = 1)
+    @Transactional
     @GetMapping("list")
-    public List<Restaurant> getRestaurantList() {
+    public List<RestaurantMenuDTO> getRestaurantList() {
 
-        List<Restaurant> restaurantList = restaurantRepository.findAllEntityGraph();
-        log.info(restaurantList);
+        List<RestaurantMenuDTO> restaurantMenuDTOList = restaurantMenuService.findAllEntityGraph();
+        log.info(restaurantMenuDTOList);
 
-        return restaurantList;
+        return restaurantMenuDTOList;
     }
 
     @PostMapping("menu/add")

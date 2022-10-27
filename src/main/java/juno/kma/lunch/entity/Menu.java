@@ -23,7 +23,7 @@ public class Menu {
 
     @Comment("메뉴 이름")
     @Column(length = 30, nullable = false)
-    private String name;
+    private String menuName;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY)

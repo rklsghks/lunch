@@ -77,7 +77,7 @@
     function addMenu() {
 
         let menuName = $('input[name=menu-name]').val();
-        let data = {"name": menuName};
+        let data = {"menuName": menuName};
         $.ajax({
             url: "/menu/add",
             type: "post",
@@ -102,7 +102,7 @@
                     console.log(data[idx]);
                     str += "<tr>";
                     str += "<td>" + data[idx].menuCd + "</td>";
-                    str += "<td>" + data[idx].name + "</td>";
+                    str += "<td>" + data[idx].menuName + "</td>";
                     str += "</tr>";
                 }
                 $('#menu-table > tbody').html(str);
@@ -116,7 +116,7 @@
     function addRestaurant() {
 
         let restaurantName = $('input[name=restaurant-name]').val();
-        let data = {"name": restaurantName};
+        let data = {"restaurantName": restaurantName};
         $.ajax({
             url: "/restaurant/add",
             type: "post",
@@ -136,13 +136,12 @@
         $.ajax({
             url: "/restaurant/list",
             success: function (data) {
-                console.log("data: " + data);
                 str = "";
                 for (let idx in data) {
                     console.log(data[idx]);
                     str += "<tr>";
                     str += "<td>" + data[idx].restaurantCd + "</td>";
-                    str += "<td>" + data[idx].name + "</td>";
+                    str += "<td>" + data[idx].restaurantName + "</td>";
                     str += "</tr>";
                 }
                 $('#restaurant-table > tbody').html(str);
