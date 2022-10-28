@@ -25,7 +25,7 @@ public class Menu {
     @Column(length = 30, nullable = false)
     private String menuName;
 
-    @JsonManagedReference
+//    @JsonManagedReference
     @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY)
     private Set<RestaurantMenu> restaurantMenus = new LinkedHashSet<>();
 }

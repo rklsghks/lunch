@@ -29,6 +29,5 @@ public class RestaurantMenuDTO {
         private Long menuCd;
         private String menuName;
     }
-
 }
 

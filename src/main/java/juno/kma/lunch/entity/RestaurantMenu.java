@@ -21,15 +21,13 @@ public class RestaurantMenu {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_cd")
-    @JsonBackReference
-//    @JsonManagedReference
+//    @JsonBackReference
     private Restaurant restaurant;
 
     @Comment("메뉴 코드")
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_cd")
-    @JsonBackReference
-//    @JsonManagedReference
+//    @JsonBackReference
     private Menu menu;
 }

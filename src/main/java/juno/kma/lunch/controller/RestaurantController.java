@@ -29,14 +29,14 @@ public class RestaurantController {
     private RestaurantMenuRepository restaurantMenuRepository;
     private RestaurantMenuService restaurantMenuService;
 
+    /* 식당 추가 */
     @PostMapping("add")
     public void addRestaurant(Restaurant restaurant) {
 
         restaurantRepository.save(restaurant);
     }
 
-    //    @BatchSize(size = 1)
-    @Transactional
+    /* 식당 리스트 조회 */
     @GetMapping("list")
     public List<RestaurantMenuDTO> getRestaurantList() {
 
