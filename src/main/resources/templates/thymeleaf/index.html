@@ -1,67 +1,22 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Lunch</title>
-</head>
+<head th:replace="/thymeleaf/head.html :: head"></head>
 <body>
-<h1>식당</h1>
-<div class="container">
-    <div>
-        <input name="restaurant-name" value="산쪼메">
-        <button onclick="addRestaurant()">add</button>
-        <button onclick="getRestaurantList()">findAll</button>
-    </div>
-    <table id="restaurant-table">
-        <thead>
-        <tr>
-            <th>cd</th>
-            <th>name</th>
-        </tr>
-        </thead>
-        <tbody/>
-    </table>
-    <hr>
-    <hr>
-    <h1>메뉴</h1>
-    <div>
-        <input name="menu-name" value="돈코츠 라멘">
-        <button onclick="addMenu()">add</button>
-        <button onclick="getMenuList()">findAll</button>
-    </div>
-    <table id="menu-table">
-        <thead>
-        <tr>
-            <th>cd</th>
-            <th>name</th>
-        </tr>
-        </thead>
-        <tbody/>
-    </table>
-    <hr>
-    <hr>
-    <h1>식당 메뉴</h1>
-    <div>
-        <button onclick="addRestaurantMenu()">add</button>
-    </div>
-    <table id="restaurant-menu-table">
-        <thead>
-        <tr>
-            <th>cd</th>
-            <th>name</th>
-        </tr>
-        </thead>
-        <tbody/>
-    </table>
+<header th:replace="/thymeleaf/header.html"></header>
+<div id="main-container">
+    <div id="content-container"></div>
 </div>
 <script type="text/javascript" src="js/jquery/jquery-3.6.1.js"></script>
 <script type="text/javascript">
     $(function () {
-        getRestaurantList();
-        // getMenuList();
+        getRestaurantPage();
+
     })
 
+    function getRestaurantPage() {
+        $('#content-container').load('/html/restaurant.html');
+    }
+
     function addRestaurantMenu() {
+
         $.ajax({
             url: "/restaurant/menu/add",
             type: "post",
@@ -86,65 +41,6 @@
             // dataType: "json",
             success: function () {
                 getMenuList();
-            },
-            error: function () {
-                console.log("error");
-            }
-        })
-    }
-
-    function getMenuList() {
-        $.ajax({
-            url: "/menu/list",
-            success: function (data) {
-                str = "";
-                for (let idx in data) {
-                    console.log(data[idx]);
-                    str += "<tr>";
-                    str += "<td>" + data[idx].menuCd + "</td>";
-                    str += "<td>" + data[idx].menuName + "</td>";
-                    str += "</tr>";
-                }
-                $('#menu-table > tbody').html(str);
-            },
-            error: function () {
-                console.log("error");
-            }
-        })
-    }
-
-    function addRestaurant() {
-
-        let restaurantName = $('input[name=restaurant-name]').val();
-        let data = {"restaurantName": restaurantName};
-        $.ajax({
-            url: "/restaurant/add",
-            type: "post",
-            data: data,
-            // data: JSON.stringify(data),
-            // dataType: "json",
-            success: function () {
-                getRestaurantList();
-            },
-            error: function () {
-                console.log("error");
-            }
-        })
-    }
-
-    function getRestaurantList() {
-        $.ajax({
-            url: "/restaurant/list",
-            success: function (data) {
-                str = "";
-                for (let idx in data) {
-                    console.log(data[idx]);
-                    str += "<tr>";
-                    str += "<td>" + data[idx].restaurantCd + "</td>";
-                    str += "<td>" + data[idx].restaurantName + "</td>";
-                    str += "</tr>";
-                }
-                $('#restaurant-table > tbody').html(str);
             },
             error: function () {
                 console.log("error");

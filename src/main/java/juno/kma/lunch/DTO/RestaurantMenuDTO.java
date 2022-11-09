@@ -18,8 +18,8 @@ public class RestaurantMenuDTO {
     public static class RestaurantDTO {
         private Long restaurantCd;
         private String restaurantName;
-        private LocalDate lastVisitDate;
         private String signatureMenu;
+        private LocalDate lastVisitDate;
     }
 
     @AllArgsConstructor

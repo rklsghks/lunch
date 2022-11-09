@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Log4j2
@@ -33,6 +32,8 @@ public class RestaurantController {
     @PostMapping("add")
     public void addRestaurant(Restaurant restaurant) {
 
+        log.info(restaurant);
+
         restaurantRepository.save(restaurant);
     }
 
@@ -47,21 +48,7 @@ public class RestaurantController {
     }
 
     @PostMapping("menu/add")
-    public void addRestaurantMenu() {
-
-        Restaurant restaurant = Restaurant.builder()
-                .restaurantCd(1L)
-                .build();
-
-        Menu menu = Menu.builder()
-                .menuCd(1L)
-                .build();
-
-        RestaurantMenu restaurantMenu = RestaurantMenu.builder()
-                .restaurant(restaurant)
-                .menu(menu)
-                .build();
-
+    public void addRestaurantMenu(RestaurantMenu restaurantMenu) {
         restaurantMenuRepository.save(restaurantMenu);
     }
 

@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/css/restaurant.css">
+<h1>Restaurant Page</h1>
+<table id="restaurant-table">
+    <thead>
+    <tr>
+        <th>식당 이름</th>
+        <th>대표 메뉴</th>
+        <th>최근 방문일</th>
+        <th class="btn-th">
+            <button onclick="getAddRestaurantForm()">식당 추가</button>
+        </th>
+        <th class="btn-th save-th">
+            <button onclick="addRestaurant()">저장</button>
+        </th>
+        <th class="btn-th reset-th">
+            <button onclick="getRestaurantPage()">reset</button>
+        </th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<script type="text/javascript" src="/js/restaurant/restaurant.js"></script>
+<script type="text/javascript">
+    $(function () {
+        getRestaurantList();
+    })
+
+</script>

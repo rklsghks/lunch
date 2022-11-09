@@ -1,0 +1,14 @@
+table {width: 100%; border: 1px solid red; border-collapse: collapse; text-align: center;}
+
+th, td {border: 1px solid black; padding: 5px;}
+
+input {margin: 0; padding: 0 5px; box-sizing: border-box;}
+
+/*.btn-th {width: 10%;}*/
+
+.save-th {
+    display: none; /* 식당 추가 버튼 클릭 시 보이게 하기 위해 일단 안보이게 */
+}
+.reset-th {
+    display: none; /* 식당 추가 버튼 클릭 시 보이게 하기 위해 일단 안보이게 */
+}
